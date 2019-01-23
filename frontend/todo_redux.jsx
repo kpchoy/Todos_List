@@ -8,7 +8,6 @@ import {allTodos} from './reducers/selectors';
 document.addEventListener('DOMContentLoaded', () => {
   const store = configureStore();
   window.store = store;
-  window.allTodos = allTodos(store.getState());
 
   const root = document.getElementById("root");
   ReactDOM.render(<Root store={store} />, root);
