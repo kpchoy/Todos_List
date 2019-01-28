@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { receiveTodo } from '../../actions/todo_actions';
+import {uniqueId} from '../../util/id_generator';
 
 export default class TodoForm extends Component {
   constructor(props) {
@@ -7,10 +7,12 @@ export default class TodoForm extends Component {
     this.state = {
       title: '',
       body: '',
+      done: false,
     };
 
     this.updateTitle = this.updateTitle.bind(this);
     this.updateBody = this.updateBody.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   updateTitle(e) { 
@@ -22,26 +24,40 @@ export default class TodoForm extends Component {
   updateBody(e) {
     this.setState({body: e.currentTarget.value}, () => {
       console.log(this.state.body);
-    })
+    });
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const todo = Object.assign({}, this.state, {id: uniqueId()});
+    this.props.receiveTodo(todo);
+    this.setState({
+      title: "",
+      body: ""
+    });
+  }
 
   render() {
 
     return (
-      <div>
-        Todo Form
-        <form>
-          <p>Title:</p>
-          <input type="text" onChange={this.updateTitle} value={this.state.title}/>
 
-          <p>Body:</p>
+
+        <form onSubmit={this.handleSubmit}>
+          <label>
+          Title:
+          <input type="text" onChange={this.updateTitle} value={this.state.title}/>
+          </label>
+
+          <label>
+          Body:
           <textarea cols="30" rows="10" onChange={this.updateBody}
           value={this.state.body}
           ></textarea>
+          </label>
 
+          <button className="create-button">Create Todo!</button>
         </form>
-      </div>
+      
     );
   }
 }
