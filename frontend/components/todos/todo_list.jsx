@@ -27,7 +27,7 @@ export default class todoList extends Component {
         </ul>
 
         <h2>Todo Form</h2>
-        < TodoListForm />
+        < TodoListForm receiveTodo={receiveTodo}/>
       </div>
     )
   }
