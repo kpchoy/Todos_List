@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoListItem from './todo_list_item';
+import TodoListForm from './todo_form';
 
 export default class todoList extends Component {
   constructor(props) {
@@ -24,6 +25,9 @@ export default class todoList extends Component {
         <ul>
           {todos}
         </ul>
+
+        <h2>Todo Form</h2>
+        < TodoListForm />
       </div>
     )
   }
